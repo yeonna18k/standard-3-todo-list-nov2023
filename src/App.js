@@ -19,6 +19,8 @@ function App() {
     setCount(count + 1);
     console.log(newquery);
   }
+
+  function deleteHandler() {}
   return (
     <div className="App">
       <header>
@@ -45,7 +47,16 @@ function App() {
               <div className="todolist-div">
                 <h3>{e.title}</h3>
                 <p>{e.content}</p>
-                <button>삭제</button>
+                <button
+                  onClick={function (e) {
+                    let deletetodo = toDo.filter(function (target) {
+                      return e.id !== target.id;
+                    });
+                    console.log(deletetodo);
+                  }}
+                >
+                  삭제
+                </button>
                 <button>완료</button>
               </div>
             ))}
