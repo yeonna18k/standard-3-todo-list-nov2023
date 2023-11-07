@@ -48,11 +48,12 @@ function App() {
                 <h3>{e.title}</h3>
                 <p>{e.content}</p>
                 <button
-                  onClick={function (e) {
+                  onClick={function () {
                     let deletetodo = toDo.filter(function (target) {
                       return e.id !== target.id;
                     });
                     console.log(deletetodo);
+                    setToDo(deletetodo);
                   }}
                 >
                   삭제
