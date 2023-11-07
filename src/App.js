@@ -1,23 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [toDo, setToDo] = useState("");
+  const [count, setCount] = useState(0);
+
+  function onClickHandler() {
+    const query = {
+      id: count,
+      title: title,
+      content: content,
+    };
+    const newquery = [...toDo, query];
+    setToDo(newquery);
+    setCount(count + 1);
+    console.log(newquery);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>ToDoList</h1>
+        <input
+          value={title}
+          onChange={function (e) {
+            setTitle(e.target.value);
+          }}
+        />
+        <input
+          value={content}
+          onChange={function (e) {
+            setContent(e.target.value);
+          }}
+        />
+        <button onClick={onClickHandler}>추가하기</button>
       </header>
+      <div className="todolist">
+        <div>
+          <p>working</p>
+          {toDo &&
+            toDo.map((e) => (
+              <div className="todolist-div">
+                <h3>{e.title}</h3>
+                <p>{e.content}</p>
+                <button>삭제</button>
+                <button>완료</button>
+              </div>
+            ))}
+        </div>
+        <div>
+          <p>done</p>
+        </div>
+      </div>
     </div>
   );
 }
